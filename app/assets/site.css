@@ -1,0 +1,69 @@
+.as-theme {
+    max-width: 80em;
+    background: #2c3e50;
+    color: #FFF;
+    margin: 0 auto;
+}
+
+.as-theme a {
+    color: #ffb046;
+    text-shadow: #000 1px 1px 1px;
+}
+
+.as-theme article{
+    background: #34495e;
+    padding: 0.1em 1em 1em 1em;
+    border-radius: 1em;
+}
+
+
+/** Header **/
+
+.as-theme header {
+    text-align: center;
+    /* background: linear-gradient(to bottom, #EEE 0%, #CCC 100%); */
+}
+
+.as-theme header a > h1 > img {
+    padding-top: 0.3em;
+}
+
+
+/** Footer **/
+
+.as-theme footer {
+    padding: 1em;
+    text-align: center;
+    /* background: linear-gradient(to bottom, #EEE 0%, #CCC 100%); */
+}
+
+
+
+/** Section **/
+
+
+.as-theme .choose-section {
+    display: flex;
+    justify-content: center;
+}
+
+.as-theme .choose-section > div {
+    text-align: center;
+    display: inline-block;
+    width: 40%;
+    background-color: #2980b9;
+    padding: 1em 1em 0 1em;
+    margin: 1em;
+    border-radius: 1em;
+}
+
+.as-theme .choose-section img {
+    max-width: 70%;
+}
+
+/** Lists **/
+
+.as-theme ul.features {
+    font-size: x-small;
+    font-family: 'Advent Pro', monospace;
+}

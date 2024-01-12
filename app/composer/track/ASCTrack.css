@@ -1,0 +1,122 @@
+
+/** ASCTrack **/
+
+/*div.asct-container {*/
+/*    flex: 1 1 auto;*/
+/*}*/
+/*:host(.fullscreen) asui-div.asc-container {*/
+/*    height: 100%;*/
+/*}*/
+
+div.asct-container {
+    /*max-height: 80vh;*/
+    /*overflow-y: auto;*/
+}
+
+
+
+/** Track **/
+div.asc-track {
+    margin: 1px;
+    position: relative;
+    vertical-align: top;
+    /* height: 100%; */
+    /*overflow: auto;*/
+    /*display: inline-block;*/
+
+}
+div.audio-source-composer.landscape div.asc-content-container > div.asc-track {
+    display: inline-block;
+}
+div.audio-source-composer.landscape div.asc-track:not(.minimize) {
+    /*width: 50%;*/
+    max-width: 500px;
+}
+
+/** Header **/
+
+div.asc-track > div.header {
+    cursor: pointer;
+    background-color: #333;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #BBB;
+}
+
+div.asc-track > div.header > div.text {
+    cursor: pointer;
+    padding: 3px 6px 0px 6px;
+    white-space: nowrap;
+
+}
+div.asc-track > div.header > div.config {
+    float: right;
+    padding-right: 4px;
+}
+
+
+div.asc-track:not(.selected) > div.header {
+    background-color: #777;
+}
+
+/** Footer **/
+
+div.asc-track > div.footer {
+    background: linear-gradient(to bottom, #CCC 0%,#666 100%);
+    border-radius: 0 0 8px 8px ;
+    min-height: 5px;
+}
+div.asc-track.large > div.footer {
+    min-height: 1em;
+}
+
+/** Selected Track **/
+
+div.asc-track:not(.selected) {
+    color: #777;
+}
+
+div.asc-track.selected {
+    /*flex: 0.5;*/
+}
+
+
+
+/** Minimize **/
+div.asc-track.minimize > div.header {
+    border-radius: 8px;
+}
+div.asc-track.minimize > div.header > div.text {
+    padding: 1em 2em;
+}
+
+
+/** Float **/
+div.asc-track.float {
+    float: right;
+}
+
+
+
+/** Track Segments **/
+
+div.asc-track > div.buttons {
+    display: flex;
+}
+div.asc-track > div.buttons > div.segments > div.asui-button {
+    min-width: 20px;
+    justify-content: center;
+}
+div.asc-track > div.buttons > div.options {
+    margin-left: auto;
+}
+
+
+div.asc-track > div.buttons-select-track > div.select-track{
+    display: block;
+    text-align: center;
+}

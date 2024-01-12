@@ -1,0 +1,253 @@
+
+/** Composer **/
+div.audio-source-composer {
+    position: relative;
+    font-family: monospace;
+    color: #000;
+    background-color: #EEE;
+    /* margin-top: -14px; */
+    user-select: none;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+}
+
+
+/** Font styles **/
+
+div.audio-source-composer input,
+div.audio-source-composer button,
+div.audio-source-composer {
+    font-size: large;
+}
+
+span.error {
+    color: red;
+    font-weight: bold;
+}
+
+/** Container **/
+div.asc-container {
+    display: flex;
+    flex-direction: column;
+}
+div.audio-source-composer.fullscreen div.asc-container {
+    flex: 1;
+}
+
+/** Content **/
+div.asc-content-container {
+    overflow-y: auto;
+    flex: 1;
+}
+
+
+/** Full Screen **/
+div.audio-source-composer.fullscreen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+
+
+/** Header **/
+
+
+div.asc-header-container {
+    background-color: #bdc3c7;
+    /*min-height: 40px;*/
+}
+
+
+
+
+/** Title **/
+
+
+div.asc-title-text {
+    text-align: center;
+    white-space: nowrap;
+    font-weight: bold;
+    /*background-color: #888;*/
+    color: #333;
+    padding: 3px 0 1px 0;
+
+}
+
+/** Portrait Title **/
+
+
+div.audio-source-composer.portrait div.asc-title-text {
+    position: absolute;
+    top: 8px;
+    width: 100%;
+}
+
+/** Menu Container **/
+
+
+div.asc-menu-container {
+    background-color: #AAA;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 3;
+}
+
+/** Menu Items **/
+
+div.audio-source-composer.landscape div.asc-menu-container > div.asui-menu-item {
+    padding: 0px 8px 0px 4px;
+}
+
+
+/** Portrait Menu Button **/
+
+div.asc-menu-button-toggle {
+    position: relative;
+    z-index: 2;
+}
+
+div.asc-menu-button-toggle > div.asui-icon {
+    height: 2em;
+    width: 2em;
+    transition: transform 0.3s ease-out;
+}
+
+/*div.asc-menu-button-toggle.stick > div.title > div.asc-icon {*/
+/*    transform: rotate(90deg);  TODO*/
+/*}*/
+
+
+div.asui-contextmenu-dropdown > div.asui-menu-item {
+    padding: 0.5em;
+}
+
+
+/** UI Panels **/
+
+
+/** Landscape **/
+div.audio-source-composer.landscape div.asc-content-container > div.asui-panel {
+    display: inline-block;
+}
+
+/** Track Panels **/
+
+@media only screen and (min-width: 1500px) {
+
+    div.audio-source-composer.landscape br.asui-track-panel-break {
+        display: none;
+    }
+
+}
+
+div.audio-source-composer.landscape div.asui-track-panel-container > div.asui-panel {
+    display: inline-block;
+}
+
+/** Portrait **/
+
+div.audio-source-composer.portrait div.asc-container {
+    width: 100%;
+
+}
+
+
+div.audio-source-composer.portrait div.asui-panel > div.container {
+    /*flex-wrap: nowrap;*/
+    /*overflow-y: visible;*/
+}
+
+
+div.audio-source-composer.portrait div.asc-content-container {
+    max-height: 70vh;
+    /*overflow-y: auto;*/
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+}
+
+div.audio-source-composer.portrait div.asc-content-container > div.asui-panel {
+    flex: 1;
+    overflow-x: auto;
+}
+div.audio-source-composer.portrait div.asc-content-container > div.asui-panel.programs,
+div.audio-source-composer.portrait div.asc-content-container > div.asc-tracks-container {
+    flex: 1 100%;
+}
+
+
+
+@media only screen and (min-width: 580px) {
+    div.audio-source-composer.portrait div.asui-panel-container-horizontal {
+        display: flex;
+    }
+}
+
+div.audio-source-composer.portrait div.asui-panel-container-horizontal > div.asui-panel {
+    flex: 1;
+}
+
+/** No-Wrap Portrait Panels **/
+div.audio-source-composer.portrait div.asui-panel.song > div.container,
+div.audio-source-composer.portrait div.asui-panel.track > div.container,
+div.audio-source-composer.portrait div.asui-panel.instruction > div.container,
+div.audio-source-composer.portrait div.asui-panel.instruction > div.container {
+    flex-wrap: nowrap;
+}
+/** Instruction Panel **/
+div.audio-source-composer.landscape div.asui-panel.instruction {
+    /*min-width: 480px;*/
+}
+
+/** Song Panel **/
+
+
+/** Program Panel **/
+@media only screen and (min-width: 1200px) {
+    div.asui-panel.programs {
+        /*position: absolute;*/
+        /*top: 40px;*/
+        /*right: 0;*/
+    }
+}
+
+div.audio-source-composer.portrait div.asui-panel.programs > div.container {
+    flex-wrap: wrap;
+}
+
+div.asui-panel.programs div.program-add {
+    /*transform: rotate(90deg);*/
+}
+
+/** Footer **/
+
+div.asc-status-text {
+    padding-left: 4px;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+div.asc-status-text.error {
+    color: red;
+}
+
+div.asc-version-text {
+    color: #2c3e50;
+    /* float: right; */
+    padding-right: 4px;
+    padding-left: 8px;
+    margin-left: auto;
+}
+
+
+/** Status Bar **/
+div.asc-footer-container {
+    display: flex;
+    background-color: #FFF;
+    color: #000;
+    padding: 0px;
+}

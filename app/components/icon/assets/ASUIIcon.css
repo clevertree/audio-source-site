@@ -1,0 +1,16 @@
+
+
+/** Icons **/
+img.asui-icon {
+    /*font-size: large;*/
+    width: 1em;
+    height: 1em;
+    background-size: cover;
+    margin: 2px;
+}
+
+img.asui-icon.large {
+    width: 2em;
+    height: 2em;
+
+}

@@ -1,0 +1,47 @@
+div.asc-instrument-renderer {
+    display: inline-block;
+    background: #DDD;
+    border: 1px outset #FFF;
+    padding: 2px;
+    margin: 0px 0px 0px 0px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+div.asc-instrument-renderer:hover {
+    background: #AAC9C5;
+}
+div.asc-instrument-renderer.selected {
+    background-color: #90BEDE;
+}
+
+div.asc-instrument-renderer:focus {
+
+}
+
+
+
+div.asc-instrument-renderer > div.header {
+    display: flex;
+}
+div.asc-instrument-renderer.open > div.header {
+    /*background: linear-gradient(#FFF, #999);*/
+    /*border-radius: 8px;*/
+}
+
+
+div.asc-instrument-renderer > div.header > div.toggle-container {
+    flex-basis: 100%;
+}
+
+div.asc-instrument-renderer > div.header > div.program-config {
+    /*padding-left: 4px;*/
+}
+div.asc-instrument-renderer > div.header > div.error {
+    color: #620100;
+}
+
+
+div.asc-instrument-renderer > div.content {
+    cursor: default;
+}

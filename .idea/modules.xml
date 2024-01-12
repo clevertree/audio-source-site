@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/snesology-next2.iml" filepath="$PROJECT_DIR$/.idea/snesology-next2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../snesology-nextjs/.idea/snesology-nextjs.iml" filepath="$PROJECT_DIR$/../snesology-nextjs/.idea/snesology-nextjs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../snesology-web/.idea/snesology-web.iml" filepath="$PROJECT_DIR$/../snesology-web/.idea/snesology-web.iml" />
+    </modules>
+  </component>
+</project>
