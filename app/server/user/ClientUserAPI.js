@@ -1,10 +1,9 @@
 const {
     publicURL
 } = require('../../../config.json');
-const serverBaseURL = publicURL || document.location.origin;
 
 
-console.log('serverBaseURL', serverBaseURL);
+// console.log('serverBaseURL', serverBaseURL);
 
 export default class ClientUserAPI {
     static userFields = {
@@ -29,7 +28,7 @@ export default class ClientUserAPI {
             password
         })
         const responseJSON = await response.json();
-        if(response.status !== 200)
+        if (response.status !== 200)
             throw new Error(response.statusText)
 
         console.log("Login Response: ", responseJSON, response);
@@ -40,7 +39,7 @@ export default class ClientUserAPI {
         console.log("Submitting Logout");
         const response = await postJSON('/logout');
         const responseJSON = await response.json();
-        if(response.status !== 200)
+        if (response.status !== 200)
             throw new Error(response.statusText)
 
         console.log("Logout Response: ", responseJSON, response);
@@ -55,7 +54,7 @@ export default class ClientUserAPI {
             username,
             artistTitle
         })
-        if(response.status !== 200)
+        if (response.status !== 200)
             throw new Error(response.statusText)
 
         const responseJSON = await response.json();
@@ -69,7 +68,7 @@ export default class ClientUserAPI {
     async getSession() {
         // console.log("Submitting Session Request");
         const response = await getJSON('/session')
-        if(response.status !== 200)
+        if (response.status !== 200)
             throw new Error(response.statusText)
 
         const responseJSON = await response.json();
@@ -81,6 +80,7 @@ export default class ClientUserAPI {
 
 
 async function getJSON(url) {
+    const serverBaseURL = publicURL || document.location.origin;
     url = new URL(url, serverBaseURL).toString();
     console.log("GET ", url);
     return await fetch(url, {
@@ -89,7 +89,9 @@ async function getJSON(url) {
         redirect: 'error'
     });
 }
+
 async function postJSON(url, jsonObject) {
+    const serverBaseURL = publicURL || document.location.origin;
     url = new URL(url, serverBaseURL).toString()
     console.log('POST', url, jsonObject);
     return await fetch(url, {

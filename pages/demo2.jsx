@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react";
-import {ASUIMarkdown, ASUIPageContainer} from "../components";
-import {ASComposer} from "../composer";
+import {ASUIMarkdown, ASUIPageContainer} from "../app/components";
+import {ASComposer} from "../app/composer";
 
-export default class Demo extends React.Component {
+export default class Demo2 extends React.Component {
     render() {
         return (
             <ASUIPageContainer {...this.props}>

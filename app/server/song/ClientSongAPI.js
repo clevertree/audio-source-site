@@ -1,7 +1,6 @@
 const {
     publicURL
 } = require('../../../config.json');
-const serverBaseURL = publicURL || document.location.origin;
 
 
 // console.log('serverBaseURL', serverBaseURL);
@@ -10,6 +9,7 @@ export default class ClientSongAPI {
 
 
     async isPublished(uuid) {
+        const serverBaseURL = publicURL || document.location.origin;
         console.log("Is Published: ", uuid);
         const response = await getJSON(serverBaseURL + '/isPublished/' + uuid)
         if (response.status !== 200)
@@ -22,6 +22,7 @@ export default class ClientSongAPI {
     }
 
     async publish(songData, filename) {
+        const serverBaseURL = publicURL || document.location.origin;
         console.log("Publishing Song: ", songData);
         const response = await postJSON(serverBaseURL + '/publish', {
             song: songData,

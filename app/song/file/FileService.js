@@ -1,5 +1,7 @@
 import WebTorrent from "webtorrent";
 
+const {Worker} = require("node:worker_threads");
+
 // const archiveBuffers = {};
 const torrentCache = {};
 const trackerURLS = [
@@ -31,7 +33,7 @@ export default class FileService {
 
     async loadBufferFromURL(url) {
         // this.log("Loading buffer from url: " + url);
-        if(url.toString().startsWith('torrent://')) {
+        if (url.toString().startsWith('torrent://')) {
             console.log('Loading: ' + url);
             const buffer = await this.getFileBufferFromTorrent(url);
             // console.log('Loaded: ' + url, buffer);
@@ -44,7 +46,7 @@ export default class FileService {
 
     getMagnetURL(torrentID) {
         // &dn=snes
-        let magnetURL = `magnet:?xt=urn:btih:${torrentID}&dn=torrent&${trackerURLS.map(t => 'tr='+t).join('&')}`;
+        let magnetURL = `magnet:?xt=urn:btih:${torrentID}&dn=torrent&${trackerURLS.map(t => 'tr=' + t).join('&')}`;
         // magnetURL = 'magnet:?xt=urn:btih:13d7d0f8eb6f1b8a2e2dcd1513f999ec7b138023&dn=s&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com';
         console.log('magnetURL', magnetURL);
         return magnetURL;
@@ -62,14 +64,14 @@ export default class FileService {
 
         const filePath = torrent.name + '/' + parsedURL.pathname.substr(1);
 
-        for(let i=0; i<torrent.files.length; i++) {
+        for (let i = 0; i < torrent.files.length; i++) {
             const file = torrent.files[i];
-            if(filePath === file.path) {
+            if (filePath === file.path) {
                 return await new Promise((resolve, reject) => {
                     // const stream = file.createReadStream();
                     // resolve(stream);
-                    file.getBuffer(async function(err, buffer) {
-                        if(err) throw new Error(err);
+                    file.getBuffer(async function (err, buffer) {
+                        if (err) throw new Error(err);
                         resolve(buffer); // TODO: not a buffer?
                     });
                 })
@@ -93,9 +95,9 @@ export default class FileService {
 
     async getFileBufferFromArchive(archiveBuffer, filePath) {
         const files = await this.decompress7ZipArchive(archiveBuffer);
-        for(let i=0; i<files.length; i++) {
+        for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            if(file.path === filePath) {
+            if (file.path === filePath) {
                 return file.data;
             }
         }
@@ -106,8 +108,8 @@ export default class FileService {
     async getTorrent(torrentID) {
         // var WebTorrent = await requireWebTorrent();
 
-        if(torrentCache[torrentID]) {
-            if(torrentCache[torrentID] instanceof Promise)
+        if (torrentCache[torrentID]) {
+            if (torrentCache[torrentID] instanceof Promise)
                 await torrentCache[torrentID];
             return torrentCache[torrentID];
         }
@@ -145,37 +147,37 @@ export default class FileService {
         var totalMemory = 268435456;
         var INTERRUPT = false;
         var rootdata = "/data";
-        var fileName=  'archive.7z';
-        fda.push(new DataStorage(rootdata,true,null));
+        var fileName = 'archive.7z';
+        fda.push(new DataStorage(rootdata, true, null));
         const filedata = new Uint8Array(archiveBuffer);
-        fda.push(new DataStorage(rootdata  + "/" + fileName,false,filedata));
+        fda.push(new DataStorage(rootdata + "/" + fileName, false, filedata));
 
-        const workerURL =  'assets/3rdparty/7zip/js/worker.7z.wrapper.js';
+        const workerURL = 'assets/3rdparty/7zip/js/worker.7z.wrapper.js';
 
         let worker7z = new Worker(workerURL);
 
         return await new Promise((resolve, reject) => {
             worker7z.onerror = console.error; // TODO: reuse webworker
-            worker7z.onmessage = function(event) {//1
+            worker7z.onmessage = function (event) {//1
                 if (INTERRUPT) {
                     finfunc();
                     return;
                 }
-                if (event.data.type === 1){
+                if (event.data.type === 1) {
                     // console.info(event.data.text);
-                } else if (event.data.type === 2){
+                } else if (event.data.type === 2) {
                     // console.info(event.data.text);
-                } else if (event.data.type === 3){
+                } else if (event.data.type === 3) {
                     resolve(event.data.results);
                     worker7z.terminate();//this is very important!!! You have to release memory!
                 }
             };
-            var fda0 = [fda[0],fda[1]];
-            var args = ["x",  fda0[1].path ,"-o/result"];
+            var fda0 = [fda[0], fda[1]];
+            var args = ["x", fda0[1].path, "-o/result"];
             worker7z.postMessage({
-                id:1,
-                action:'doit',
-                arguments:args,
+                id: 1,
+                action: 'doit',
+                arguments: args,
                 totalMemory: totalMemory,
                 FilesDataArray: fda0
             });
@@ -188,7 +190,7 @@ export default class FileService {
             }
         });
 
-        function DataStorage(path,isdir,data) {
+        function DataStorage(path, isdir, data) {
             this.path = path;
             this.isdir = isdir;
             this.data = data;

@@ -1,6 +1,4 @@
-
-var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
-    dbVersion = 1.0,
+var dbVersion = 1.0,
     dbName = "file_cache";
 
 export default class LocalFileCache {
@@ -12,8 +10,9 @@ export default class LocalFileCache {
     }
 
     async getDB() {
-        if(this.db)
+        if (this.db)
             return this.db;
+        const indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
 
         return new Promise((resolve, reject) => {
             const request = indexedDB.open(dbName, dbVersion);
@@ -65,7 +64,7 @@ export default class LocalFileCache {
     }
 
     async tryFile(fileName) {
-        if(!fileName)
+        if (!fileName)
             throw new Error("Invalid fileName");
         const db = await this.getDB();
         const transaction = db.transaction(dbName, 'readonly')

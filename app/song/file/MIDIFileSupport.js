@@ -1,4 +1,4 @@
-import {parseArrayBuffer} from 'midi-json-parser';
+// import {parseArrayBuffer} from 'midi-json-parser';
 import Song from "../Song";
 import Values from "../values/Values";
 
@@ -8,6 +8,7 @@ export default class MIDIFileSupport {
     // addSongEventListener(callback) { this.eventListeners.push(callback); }
 
     async processSongFromFileBuffer(fileBuffer, filePath) {
+        throw new Error("Disabled")
         const midiData = await parseArrayBuffer(fileBuffer);
 
         const song = new Song();
@@ -27,9 +28,9 @@ export default class MIDIFileSupport {
             let programName = trackName;
 
             songPositionInTicks = 0;
-            for(const trackEvent of trackEvents) {
+            for (const trackEvent of trackEvents) {
                 songPositionInTicks += trackEvent.delta;
-                if(trackEvent.trackName) {
+                if (trackEvent.trackName) {
                     programName = trackEvent.trackName.trim();
                 }
             }
@@ -45,22 +46,22 @@ export default class MIDIFileSupport {
             const lastNote = {};
             songPositionInTicks = 0;
             let nextDelta = 0;
-            for(const trackEvent of trackEvents) {
+            for (const trackEvent of trackEvents) {
                 songPositionInTicks += trackEvent.delta;
                 nextDelta += trackEvent.delta;
 
-                if(trackEvent.setTempo) {
+                if (trackEvent.setTempo) {
                     songData.beatsPerMinute = 60 / (trackEvent.setTempo.microsecondsPerQuarter / 1000000);
 
                     // console.log("TODO Tempo: ", bpm);
                     // trackEvent.setTempo.microsecondsPerQuarter;
                 }
 
-                if(trackEvent.programChange) {
+                if (trackEvent.programChange) {
                     // trackEvent.programChange.programNumber
                 }
 
-                if(trackEvent.noteOn) {
+                if (trackEvent.noteOn) {
                     let newMIDICommandOn = this.getCommandFromMIDINote(trackEvent.noteOn.noteNumber);
                     let newMIDIVelocityOn = trackEvent.noteOn.velocity; // Math.round((trackEvent.data[1] / 128) * 100);
                     // console.log("ON ", newMIDICommandOn, newMIDIVelocityOn, songPositionInTicks, trackEvent);
@@ -78,18 +79,18 @@ export default class MIDIFileSupport {
                     //     }
                     // } else {
 
-                        const newInstructionData = [nextDelta, newMIDICommandOn, 0, newMIDIVelocityOn];
-                        thisTrack.push(newInstructionData);
-                        nextDelta = 0;
+                    const newInstructionData = [nextDelta, newMIDICommandOn, 0, newMIDIVelocityOn];
+                    thisTrack.push(newInstructionData);
+                    nextDelta = 0;
 
-                        if(lastNote[newMIDICommandOn])
-                            console.warn("MIDI On hit same note twice: " + newMIDICommandOn)
-                        lastNote[newMIDICommandOn] = [songPositionInTicks, newInstructionData];
+                    if (lastNote[newMIDICommandOn])
+                        console.warn("MIDI On hit same note twice: " + newMIDICommandOn)
+                    lastNote[newMIDICommandOn] = [songPositionInTicks, newInstructionData];
 
                     // }
                 }
 
-                if(trackEvent.noteOff) {
+                if (trackEvent.noteOff) {
                     let newMIDICommandOff = this.getCommandFromMIDINote(trackEvent.noteOff.noteNumber);
                     // console.log("OFF", newMIDICommandOff, -1, songPositionInTicks, trackEvent);
 
@@ -109,6 +110,7 @@ export default class MIDIFileSupport {
         console.log('midiData', midiData, song.data)
         return song;
     }
+
 //
 //
     getCommandFromMIDINote(midiNote) {
